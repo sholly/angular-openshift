@@ -24,7 +24,7 @@ pipeline {
       steps {
         script {
           sh "npm install"
-          sh "ng build"
+          sh "npm run build"
         }
       }
     }

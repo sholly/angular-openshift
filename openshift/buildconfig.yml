@@ -18,7 +18,8 @@ objects:
   spec:
     source:
       git:
-        uri: ${GIT_URL}
+        uri: ${GIT_REPO}
+        ref: main
       sourceSecret:
         name: ${SSH_KEY_NAME}
     strategy:
@@ -37,7 +38,7 @@ objects:
   spec:
     source:
       git:
-        uri: ${GIT_URL}
+        uri: ${GIT_REPO}
       sourceSecret:
         name: ${SSH_KEY_NAME}
     strategy:
@@ -131,7 +132,7 @@ parameters:
   displayName: Application Name
   name: APPLICATION_NAME
   required: true
-  value: angular-openshift
+  value: angular-jenkins
 - description: Namespace
   displayName: Namespace
   name: NAMESPACE
