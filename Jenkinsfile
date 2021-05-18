@@ -25,6 +25,7 @@ pipeline {
         script {
           sh "npm install"
           sh "npm run build"
+          sh "ls -lR"
         }
       }
     }
