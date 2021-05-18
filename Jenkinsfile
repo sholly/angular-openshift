@@ -25,7 +25,6 @@ pipeline {
         script {
           sh "npm install"
           sh "npm run build"
-          sh "chown -R 1001:1001 ./dist"
         }
       }
     }
