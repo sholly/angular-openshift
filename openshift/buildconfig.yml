@@ -29,25 +29,6 @@ objects:
           - name: "BUILD_LOGLEVEL"
             value: "5"
       type: JenkinsPipeline
-- apiVersion: "v1"
-  kind: "BuildConfig"
-  metadata:
-    name: "${APPLICATION_NAME}-pipeline-tag"
-    labels:
-      application: ${APPLICATION_NAME}
-  spec:
-    source:
-      git:
-        uri: ${GIT_REPO}
-      sourceSecret:
-        name: ${SSH_KEY_NAME}
-    strategy:
-      jenkinsPipelineStrategy:
-        jenkinsfilePath: Jenkinsfile.tags
-        env:
-          - name: "BUILD_LOGLEVEL"
-            value: "3"
-      type: JenkinsPipeline
 - apiVersion: v1
   kind: "BuildConfig"
   metadata:
@@ -73,60 +54,6 @@ objects:
           - name: "BUILD_LOGLEVEL"
             value: "5"
       type: Source
-- apiVersion: v1
-  kind: "BuildConfig"
-  metadata:
-    labels:
-      application: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}-quayio
-    namespace: "${NAMESPACE}"
-  spec:
-    output:
-      to:
-        kind: DockerImage
-        name: quay.io/sholly/${APPLICATION_NAME}:latest
-      pushSecret:
-        name: quayio
-    source:
-      binary: {}
-      type: Binary
-    strategy:
-      sourceStrategy:
-        from:
-          kind: ImageStreamTag
-          name: "${IMAGE_STREAM_TAG_NAME}"
-          namespace: "${IMAGE_STREAM_NAMESPACE}"
-        env:
-          - name: "BUILD_LOGLEVEL"
-            value: "5"
-      type: Source
-
-- apiVersion: v1
-  kind: "BuildConfig"
-  metadata:
-    labels:
-      application: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}-quayio-tag
-    namespace: "${NAMESPACE}"
-  spec:
-    output:
-      to:
-        kind: DockerImage
-        name: quay.io/sholly/${APPLICATION_NAME}:${BUILD_TAG}
-      pushSecret:
-        name: quayio
-    source:
-      binary: {}
-      type: Binary
-    strategy:
-      sourceStrategy:
-        from:
-          kind: ImageStreamTag
-          name: "${IMAGE_STREAM_TAG_NAME}"
-          namespace: "${IMAGE_STREAM_NAMESPACE}"
-        env:
-          - name: "BUILD_LOGLEVEL"
-            value: "5"
 parameters:
 - description: Application Name
   displayName: Application Name
